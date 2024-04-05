@@ -223,7 +223,7 @@ public class UserServiceImpl implements UserService{
 
     private boolean userAndroidApp(String userAgent) {
 
-        if(userAgent != null && userAgent.toLowerCase().contains("android"))
+        if(userAgent != null && userAgent.toLowerCase().startsWith("okhttp"))
             return true;
 
         return false;
