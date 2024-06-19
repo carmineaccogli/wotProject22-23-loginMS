@@ -126,12 +126,14 @@ public class UserServiceImpl implements UserService{
 
         // 2
         newUser.setEmail(email);
-        String operatorCode = generatePassword();
+        String operatorCode = generateOperatorCode();
         newUser.setUsername(operatorCode);
 
         // 3
-        String password = generateOperatorCode();
+        String password = generatePassword();
         newUser.setPassword(passwordEncoder().encode(password));
+        System.out.println("USERNAME: "+operatorCode);
+        System.out.println("PASSWORD: "+password);
 
         // 4
         newUser.setRole(role);
@@ -140,7 +142,7 @@ public class UserServiceImpl implements UserService{
         User savedUser = userRepository.save(newUser);
 
         // 6
-        emailService.sendCredentialsEmail(newUser.getEmail(), newUser.getUsername(), newUser.getPassword());
+        //emailService.sendCredentialsEmail(newUser.getEmail(), newUser.getUsername(), newUser.getPassword());
 
         return savedUser.getId();
     }
