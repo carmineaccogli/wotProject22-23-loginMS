@@ -48,7 +48,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Object> authenticationExceptionHandler(AuthenticationException ex) {
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(new ExceptionDTO(
                         5,
                         AuthenticationException.class.getSimpleName(),
