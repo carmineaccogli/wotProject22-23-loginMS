@@ -89,8 +89,15 @@ public class UserServiceImpl implements UserService{
 
 
         // 4
-        if(user.getMacAddress() != null && validUser.getRole().equals(User.Role.EQUIPMENT_OPERATOR))
-            checkMacAddress(validUser, user.getMacAddress());
+        if(validUser.getRole().equals(User.Role.EQUIPMENT_OPERATOR)) {
+
+            if(user.getMacAddress() == null)
+                return null;
+            else
+                checkMacAddress(validUser, user.getMacAddress());
+        }
+
+
 
         // 5
         // Questo è un oggetto al cui sto dicendo che, da questo momento in poi, se sto richiamando la logica di business,
