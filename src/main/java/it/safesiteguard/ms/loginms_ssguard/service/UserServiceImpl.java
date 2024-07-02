@@ -98,7 +98,6 @@ public class UserServiceImpl implements UserService{
         }
 
 
-
         // 5
         // Questo è un oggetto al cui sto dicendo che, da questo momento in poi, se sto richiamando la logica di business,
         // questo utente è autenticato.
@@ -108,7 +107,7 @@ public class UserServiceImpl implements UserService{
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // 6
-        final String jwt = jwtUtilities.generateToken(validUser.getUsername(), validUser.getRole().toString());
+        final String jwt = jwtUtilities.generateToken(validUser.getId(), validUser.getUsername(), validUser.getRole().toString());
 
         return jwt;
     }
