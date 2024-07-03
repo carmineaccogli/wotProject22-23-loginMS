@@ -9,5 +9,5 @@ public class SecurityConstants {
 
     public static final String THIS_MICROSERVICE ="http://loginService:8080";
 
-    public static final List<String> AUDIENCE = List.of("http://loginService:8080");
+    public static final List<String> AUDIENCE = List.of("http://loginService:8080", "http://siteManagementService:8081", "http://alarmsManagementService:8082");
 }
