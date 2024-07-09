@@ -217,14 +217,14 @@ public class UserServiceImpl implements UserService{
 
         // Check valore macAddress se diverso da quello memorizzato (REFRESH)
         if(validUser.getMacAddress() != null) {
-            if (!validUser.getMacAddress().equals(newMacAddress)) {
-                validUser.setMacAddress(newMacAddress);
+            if (!validUser.getMacAddress().equalsIgnoreCase(newMacAddress)) {
+                validUser.setMacAddress(newMacAddress.toUpperCase());
                 userRepository.save(validUser);
             }
         }
         // Prima volta setting macAddress
         else {
-            validUser.setMacAddress(newMacAddress);
+            validUser.setMacAddress(newMacAddress.toUpperCase());
             userRepository.save(validUser);
         }
     }
