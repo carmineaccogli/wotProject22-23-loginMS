@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class UserRestController {
     private UserService userService;
 
 
+    //@PreAuthorize("hasRole('ROLE_Admin')")
     @RequestMapping(value="/registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseDTO> registration(@Valid @RequestBody RegistrationRequestDTO requestDTO) {
 
@@ -77,6 +79,7 @@ public class UserRestController {
      * @param workerRegistrationDTO
      * @return new User
      */
+    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_MICROSERVICE_COMMUNICATION')")
     @RequestMapping(value="/worker-registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> workerRegistration(@Valid @RequestBody WorkerRegistrationDTO workerRegistrationDTO) throws MailException {
 
@@ -84,6 +87,7 @@ public class UserRestController {
         return ResponseEntity.ok(createdUserID);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_Admin','ROLE_Safety_Manager')")
     @RequestMapping(value="/users/{userID}", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginDTO> getInfoUser(@PathVariable("userID") String userID) throws UserNotFoundException {
 
@@ -94,7 +98,7 @@ public class UserRestController {
     }
 
 
-
+    @PreAuthorize("hasAnyRole('ROLE_Admin','ROLE_Safety_Manager')")
     @RequestMapping(value="/users/", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LoginDTO>> getAll() {
 
@@ -129,6 +133,7 @@ public class UserRestController {
         return ResponseEntity.ok(allOperatorsDTO);
     }*/
 
+    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_MICROSERVICE_COMMUNICATION')")
     @RequestMapping(value="/users/macAddresses", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AuthorizedOperatorDTO>> getUsersMacAddresses(){
         List<User> allOperators = userService.getAllDriversMacAddresses();
