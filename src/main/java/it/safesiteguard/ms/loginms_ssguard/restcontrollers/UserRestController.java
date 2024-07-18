@@ -79,7 +79,7 @@ public class UserRestController {
      * @param workerRegistrationDTO
      * @return new User
      */
-    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_MICROSERVICE_COMMUNICATION')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MICROSERVICE_COMMUNICATION')")
     @RequestMapping(value="/worker-registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> workerRegistration(@Valid @RequestBody WorkerRegistrationDTO workerRegistrationDTO) throws MailException {
 
@@ -87,7 +87,7 @@ public class UserRestController {
         return ResponseEntity.ok(createdUserID);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_Admin','ROLE_Safety_Manager')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SAFETY_MANAGER')")
     @RequestMapping(value="/users/{userID}", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginDTO> getInfoUser(@PathVariable("userID") String userID) throws UserNotFoundException {
 
@@ -98,7 +98,7 @@ public class UserRestController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_Admin','ROLE_Safety_Manager')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SAFETY_MANAGER')")
     @RequestMapping(value="/users/", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LoginDTO>> getAll() {
 
@@ -133,7 +133,7 @@ public class UserRestController {
         return ResponseEntity.ok(allOperatorsDTO);
     }*/
 
-    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_MICROSERVICE_COMMUNICATION')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MICROSERVICE_COMMUNICATION')")
     @RequestMapping(value="/users/macAddresses", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AuthorizedOperatorDTO>> getUsersMacAddresses(){
         List<User> allOperators = userService.getAllDriversMacAddresses();
