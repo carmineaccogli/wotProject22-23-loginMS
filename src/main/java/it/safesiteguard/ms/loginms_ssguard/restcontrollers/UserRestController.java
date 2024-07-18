@@ -79,7 +79,7 @@ public class UserRestController {
      * @param workerRegistrationDTO
      * @return new User
      */
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MICROSERVICE_COMMUNICATION')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MICROSERVICE-COMMUNICATION')")
     @RequestMapping(value="/worker-registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> workerRegistration(@Valid @RequestBody WorkerRegistrationDTO workerRegistrationDTO) throws MailException {
 
@@ -133,7 +133,7 @@ public class UserRestController {
         return ResponseEntity.ok(allOperatorsDTO);
     }*/
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MICROSERVICE_COMMUNICATION')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MICROSERVICE-COMMUNICATION')")
     @RequestMapping(value="/users/macAddresses", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AuthorizedOperatorDTO>> getUsersMacAddresses(){
         List<User> allOperators = userService.getAllDriversMacAddresses();
