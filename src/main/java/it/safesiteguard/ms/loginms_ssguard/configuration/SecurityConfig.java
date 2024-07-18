@@ -62,7 +62,10 @@ public class SecurityConfig {
         http.cors(corsPolicy -> corsConfigurationSource())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests.anyRequest().permitAll())
+                        authorizeRequests.
+                                requestMatchers("/api/authentication/authenticate").permitAll().
+                                requestMatchers("/api/authentication/registration").permitAll().
+                                anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .exceptionHandling(ex -> ex.accessDeniedHandler(deniedHandlerEntryPoint))
                 .sessionManagement(sessionManagement ->
