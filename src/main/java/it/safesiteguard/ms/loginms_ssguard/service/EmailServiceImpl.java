@@ -16,8 +16,6 @@ public class EmailServiceImpl implements EmailService{
     @Autowired
     private SimpleMailMessage templateCredentialsMessage;
 
-    @Autowired
-    private SimpleMailMessage templateResetPasswordMessage;
 
     public void sendCredentialsEmail(String recipient, String username, String password) throws MailException {
 
