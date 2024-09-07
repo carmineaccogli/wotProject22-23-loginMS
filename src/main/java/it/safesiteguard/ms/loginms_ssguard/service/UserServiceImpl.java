@@ -148,7 +148,7 @@ public class UserServiceImpl implements UserService{
         User savedUser = userRepository.save(newUser);
 
         // 6
-        emailService.sendCredentialsEmail(newUser.getEmail(), newUser.getUsername(), newUser.getPassword());
+        emailService.sendCredentialsEmail(newUser.getEmail(), newUser.getUsername(), password);
 
         return savedUser.getId();
     }
